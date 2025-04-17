@@ -1,7 +1,9 @@
+// src/app/components/user-list/user-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 import { UserService }       from '../../services/user.service';
 import { User }              from '../../models/user';
+import { encryptId }         from '../../utils/id-crypto';
 
 @Component({
   selector: 'app-user-list',
@@ -18,16 +20,22 @@ export class UserListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe(list => this.users = list);
+    this.userService.getUsers().subscribe({
+      next: list => this.users = list,
+      error: err => alert('Error fetching users: ' + err.message)
+    });
   }
 
-  editUser(id: number) {
-    this.router.navigate(['/users/edit', id]);
+  editUser(id: string) {
+    // Navigate using the encrypted ID
+    this.router.navigate(['/users/edit', encryptId(id)]);
   }
 
-  deleteUser(id: number) {
-    if (confirm('Delete this user?')) {
-      this.userService.deleteUser(id);
-    }
+  deleteUser(id: string) {
+    if (!confirm('Delete this user?')) return;
+    this.userService.deleteUser(id).subscribe({
+      next: () => this.users = this.users.filter(u => u.id !== id),
+      error: err => alert('Delete failed: ' + err.message)
+    });
   }
 }

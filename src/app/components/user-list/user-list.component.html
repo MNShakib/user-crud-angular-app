@@ -1,14 +1,20 @@
+<!-- src/app/components/user-list/user-list.component.html -->
 <h2>User List</h2>
 
 <table *ngIf="users.length; else noUsers" class="user-table">
   <thead>
-    <tr><th>ID</th><th>Username</th><th>Password</th><th>Actions</th></tr>
+    <tr>
+      <th>S/N</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th>Actions</th>
+    </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let u of users">
-      <td>{{u.id}}</td>
-      <td>{{u.username}}</td>
-      <td>{{u.password}}</td>
+    <tr *ngFor="let u of users; let i = index">
+      <td>{{ i + 1 }}</td>                      <!-- Serial number -->
+      <td>{{ u.username }}</td>
+      <td>{{ u.password }}</td>
       <td>
         <button (click)="editUser(u.id)">Edit</button>
         <button (click)="deleteUser(u.id)">Delete</button>
