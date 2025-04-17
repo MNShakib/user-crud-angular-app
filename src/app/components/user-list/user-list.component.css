@@ -1,0 +1,15 @@
+.user-table {
+    width:100%; border-collapse:collapse; margin-bottom:1rem;
+  }
+  .user-table th, .user-table td {
+    border:1px solid #ddd; padding:.5rem; text-align:left;
+  }
+  .user-table th { background:#f2f2f2; }
+  button {
+    margin-right:.5rem; padding:.3rem .6rem; border:none; cursor:pointer;
+  }
+  button:first-child { background:#007bff; color:white; }
+  button:first-child:hover { background:#0069d9; }
+  button:last-child  { background:#dc3545; color:white; }
+  button:last-child:hover { background:#c82333; }
+  

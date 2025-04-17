@@ -1,0 +1,22 @@
+<h2>User List</h2>
+
+<table *ngIf="users.length; else noUsers" class="user-table">
+  <thead>
+    <tr><th>ID</th><th>Username</th><th>Password</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let u of users">
+      <td>{{u.id}}</td>
+      <td>{{u.username}}</td>
+      <td>{{u.password}}</td>
+      <td>
+        <button (click)="editUser(u.id)">Edit</button>
+        <button (click)="deleteUser(u.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noUsers>
+  <p>No users yet. <a routerLink="/users/create">Create one</a>.</p>
+</ng-template>
